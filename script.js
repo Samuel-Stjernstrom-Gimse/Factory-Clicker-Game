@@ -45,6 +45,7 @@ hammer.addEventListener('click', () => {
 const workerIncome = () => {
     player.money += player.workPower * 1;
     money.textContent = player.money.toString();
+    localStorage.setItem('player', JSON.stringify(player));
 };
 setInterval(workerIncome, 1000);
 const handleChildClick = (priceIncrease, startPrice, powerIncrease, childType) => {
