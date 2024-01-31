@@ -41,9 +41,9 @@ function updateCounters() {
 	cafChildCounter.textContent = 'Caffeinated Child x ' + player.cafChildCount.toString()
 	cafChildPrice.textContent = `Price: ${2000 * player.cafChildCount + 1000}`
 
-	momChildIncome.textContent = `${player.cafChildCount * 6} cash/s`
-	momChildCounter.textContent = 'Mommy`s Boy x ' + player.cafChildCount.toString()
-	momChildPrice.textContent = `Price: ${1500 * player.cafChildCount + 700}`
+	momChildIncome.textContent = `${player.momChildCount * 6} cash/s`
+	momChildCounter.textContent = 'Mommy`s Boy x ' + player.momChildCount.toString()
+	momChildPrice.textContent = `Price: ${1500 * player.momChildCount + 700}`
 }
 
 updateCounters()
