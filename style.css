@@ -39,6 +39,8 @@ body {
     background-image: url("assets/images/money.png");
     background-size: cover;
     -webkit-text-stroke: thin #9d4708;
+    border: 10px solid black;
+    margin-bottom: 10px;
 }
 
 #section-1 {
@@ -75,11 +77,12 @@ body {
     position: fixed;
     left: 4%;
     top: 4%;
-    background-color: #331500;
+    background-color: #cc8b00;
     padding: 20px;
     border-radius: 6px;
     width: 150px;
     height: 150px;
+    border: 10px solid #000000;
 }
 
 #plus-one {
@@ -88,12 +91,19 @@ body {
 }
 
 #new-hammer {
-    background-color: #331500;
+    background-color: #ce8c00;
     padding: 6px;
     border-radius: 20px;
     cursor: pointer;
+    border: 10px solid black;
 }
 
 #new-hammer:hover {
     background-color: #8b3c05;
+}
+
+h1 {
+    font-size: xx-large;
+    font-weight: bolder;
+    -webkit-text-stroke: thin #000000;
 }

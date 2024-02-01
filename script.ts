@@ -1,5 +1,3 @@
-import { children } from './assets/resorce/children.js'
-
 const player: {
 	money: number
 	workPower: number
@@ -34,7 +32,7 @@ const child = document.getElementById('child') as HTMLImageElement
 const childCounter = document.getElementById('child-counter') as HTMLHeadingElement
 const childIncome = document.getElementById('child-income') as HTMLHeadingElement
 const childPrice = document.getElementById('child-price') as HTMLHeadingElement
-const childPriceIncrease: number = 100
+const childPriceIncrease: number = 60
 const childStartPrice: number = 70
 const childStartPower: number = 1
 
@@ -44,23 +42,23 @@ const cafChildIncome = document.getElementById('cafChild-income') as HTMLHeading
 const cafChildPrice = document.getElementById('cafChild-price') as HTMLHeadingElement
 const cafChildPriceIncrease: number = 2000
 const cafChildStartPrice: number = 1000
-const cafChildPower: number = 10
+const cafChildPower: number = 15
 
 const momChild = document.getElementById('momChild') as HTMLImageElement
 const momChildCounter = document.getElementById('momChild-counter') as HTMLHeadingElement
 const momChildIncome = document.getElementById('momChild-income') as HTMLHeadingElement
 const momChildPrice = document.getElementById('momChild-price') as HTMLHeadingElement
-const momChildPriceIncrease: number = 1500
-const momChildStartPrice: number = 700
-const momChildPower: number = 6
+const momChildPriceIncrease: number = 1700
+const momChildStartPrice: number = 200
+const momChildPower: number = 13
 
 const gmoChild = document.getElementById('gmoChild') as HTMLImageElement
 const gmoChildCounter = document.getElementById('gmoChild-counter') as HTMLHeadingElement
 const gmoChildIncome = document.getElementById('gmoChild-income') as HTMLHeadingElement
 const gmoChildPrice = document.getElementById('gmoChild-price') as HTMLHeadingElement
-const gmoChildPriceIncrease: number = 2500
-const gmoChildStartPrice: number = 700
-const gmoChildPower: number = 12
+const gmoChildPriceIncrease: number = 3000
+const gmoChildStartPrice: number = 1500
+const gmoChildPower: number = 35
 
 // @ts-ignore
 const savedPlayer: string = JSON.parse(localStorage.getItem('player'))
@@ -70,6 +68,7 @@ if (savedPlayer) {
 
 hammer.src = player.hammerURL
 newHammer.textContent = `Gold Hammer ${player.hammerPrice} $`
+
 newHammer.addEventListener('click', () => {
 	if (player.hammerPrice <= player.money) {
 		if (player.hammerCount === 1) {
@@ -105,8 +104,6 @@ newHammer.addEventListener('click', () => {
 		}
 	}
 })
-
-children.forEach((child) => {})
 
 function updateCounters() {
 	money.textContent = player.money.toString()
@@ -169,17 +166,17 @@ const handleChildClick = (
 }
 
 child.addEventListener('click', () => {
-	handleChildClick(100, 70, 1, 'childCount')
+	handleChildClick(childPriceIncrease, childStartPrice, childStartPower, 'childCount')
 })
 
 cafChild.addEventListener('click', () => {
-	handleChildClick(2000, 1000, 10, 'cafChildCount')
+	handleChildClick(cafChildPriceIncrease, cafChildStartPrice, cafChildPower, 'cafChildCount')
 })
 
 momChild.addEventListener('click', () => {
-	handleChildClick(1500, 700, 6, 'momChildCount')
+	handleChildClick(momChildPriceIncrease, momChildStartPrice, momChildPower, 'momChildCount')
 })
 
 gmoChild.addEventListener('click', () => {
-	handleChildClick(1500, 700, 6, 'gmoChildCount')
+	handleChildClick(gmoChildPriceIncrease, gmoChildStartPrice, gmoChildPower, 'gmoChildCount')
 })

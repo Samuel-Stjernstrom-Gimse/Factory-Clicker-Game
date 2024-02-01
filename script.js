@@ -1,4 +1,4 @@
-import { children } from './assets/resorce/children.js';
+"use strict";
 const player = {
     money: 0,
     workPower: 0,
@@ -19,7 +19,7 @@ const child = document.getElementById('child');
 const childCounter = document.getElementById('child-counter');
 const childIncome = document.getElementById('child-income');
 const childPrice = document.getElementById('child-price');
-const childPriceIncrease = 100;
+const childPriceIncrease = 60;
 const childStartPrice = 70;
 const childStartPower = 1;
 const cafChild = document.getElementById('cafChild');
@@ -28,21 +28,21 @@ const cafChildIncome = document.getElementById('cafChild-income');
 const cafChildPrice = document.getElementById('cafChild-price');
 const cafChildPriceIncrease = 2000;
 const cafChildStartPrice = 1000;
-const cafChildPower = 10;
+const cafChildPower = 15;
 const momChild = document.getElementById('momChild');
 const momChildCounter = document.getElementById('momChild-counter');
 const momChildIncome = document.getElementById('momChild-income');
 const momChildPrice = document.getElementById('momChild-price');
-const momChildPriceIncrease = 1500;
-const momChildStartPrice = 700;
-const momChildPower = 6;
+const momChildPriceIncrease = 1700;
+const momChildStartPrice = 200;
+const momChildPower = 13;
 const gmoChild = document.getElementById('gmoChild');
 const gmoChildCounter = document.getElementById('gmoChild-counter');
 const gmoChildIncome = document.getElementById('gmoChild-income');
 const gmoChildPrice = document.getElementById('gmoChild-price');
-const gmoChildPriceIncrease = 2500;
-const gmoChildStartPrice = 700;
-const gmoChildPower = 12;
+const gmoChildPriceIncrease = 3000;
+const gmoChildStartPrice = 1500;
+const gmoChildPower = 35;
 const savedPlayer = JSON.parse(localStorage.getItem('player'));
 if (savedPlayer) {
     Object.assign(player, savedPlayer);
@@ -86,7 +86,6 @@ newHammer.addEventListener('click', () => {
         }
     }
 });
-children.forEach((child) => { });
 function updateCounters() {
     money.textContent = player.money.toString();
     childIncome.textContent = `${player.childCount} cash/s`;
@@ -129,15 +128,15 @@ const handleChildClick = (priceIncrease, startPrice, powerIncrease, childType) =
     updateCounters();
 };
 child.addEventListener('click', () => {
-    handleChildClick(100, 70, 1, 'childCount');
+    handleChildClick(childPriceIncrease, childStartPrice, childStartPower, 'childCount');
 });
 cafChild.addEventListener('click', () => {
-    handleChildClick(2000, 1000, 10, 'cafChildCount');
+    handleChildClick(cafChildPriceIncrease, cafChildStartPrice, cafChildPower, 'cafChildCount');
 });
 momChild.addEventListener('click', () => {
-    handleChildClick(1500, 700, 6, 'momChildCount');
+    handleChildClick(momChildPriceIncrease, momChildStartPrice, momChildPower, 'momChildCount');
 });
 gmoChild.addEventListener('click', () => {
-    handleChildClick(1500, 700, 6, 'gmoChildCount');
+    handleChildClick(gmoChildPriceIncrease, gmoChildStartPrice, gmoChildPower, 'gmoChildCount');
 });
 //# sourceMappingURL=script.js.map
