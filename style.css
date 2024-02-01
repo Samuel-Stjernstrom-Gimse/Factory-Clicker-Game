@@ -35,6 +35,7 @@ body {
     border-radius: 50%;
     background-image: url("assets/images/money.png");
     background-size: cover;
+    -webkit-text-stroke: thin #9d4708;
 }
 
 #section-1 {
@@ -44,13 +45,14 @@ body {
 }
 
 .childCard {
-    background-color: green;
+    background-color: #333333;
     width: 200px;
     border-radius: 30px;
 }
 
 #money-counter {
-    color: #ffffff;
+    color: #f6f6f6;
+    font-size: xx-large;
     animation-name: size;
     animation-duration: 2s;
     animation-iteration-count: infinite;
@@ -60,7 +62,24 @@ body {
 
 }
 
+
 @keyframes size {
     from {scale: 1.3}
     to {scale: 1}
+}
+
+#money {
+    position: fixed;
+    left: 4%;
+    top: 4%;
+    background-color: #331500;
+    padding: 20px;
+    border-radius: 6px;
+    width: 150px;
+    height: 150px;
+}
+
+#plus-one {
+    position: absolute;
+
 }

@@ -1,28 +1,49 @@
+import { children } from './assets/resorce/children.js'
+
 const player = {
 	money: 0,
 	workPower: 0,
 	childCount: 0,
 	cafChildCount: 0,
-	momChildCount: 0
+	momChildCount: 0,
+	gmoChildCount: 0
 }
 
 const money = document.getElementById('money-counter') as HTMLHeadingElement
+const childTotalIncome = document.getElementById('child-income-total') as HTMLHeadingElement
 const hammer = document.getElementById('hammer') as HTMLImageElement
 
 const child = document.getElementById('child') as HTMLImageElement
 const childCounter = document.getElementById('child-counter') as HTMLHeadingElement
 const childIncome = document.getElementById('child-income') as HTMLHeadingElement
 const childPrice = document.getElementById('child-price') as HTMLHeadingElement
+const childPriceIncrease: number = 100
+const childStartPrice: number = 70
+const childStartPower: number = 1
 
 const cafChild = document.getElementById('cafChild') as HTMLImageElement
 const cafChildCounter = document.getElementById('cafChild-counter') as HTMLHeadingElement
 const cafChildIncome = document.getElementById('cafChild-income') as HTMLHeadingElement
 const cafChildPrice = document.getElementById('cafChild-price') as HTMLHeadingElement
+const cafChildPriceIncrease: number = 2000
+const cafChildStartPrice: number = 1000
+const cafChildPower: number = 10
 
 const momChild = document.getElementById('momChild') as HTMLImageElement
 const momChildCounter = document.getElementById('momChild-counter') as HTMLHeadingElement
 const momChildIncome = document.getElementById('momChild-income') as HTMLHeadingElement
 const momChildPrice = document.getElementById('momChild-price') as HTMLHeadingElement
+const momChildPriceIncrease: number = 1500
+const momChildStartPrice: number = 700
+const momChildPower: number = 6
+
+const gmoChild = document.getElementById('gmoChild') as HTMLImageElement
+const gmoChildCounter = document.getElementById('gmoChild-counter') as HTMLHeadingElement
+const gmoChildIncome = document.getElementById('gmoChild-income') as HTMLHeadingElement
+const gmoChildPrice = document.getElementById('gmoChild-price') as HTMLHeadingElement
+const gmoChildPriceIncrease: number = 2500
+const gmoChildStartPrice: number = 700
+const gmoChildPower: number = 12
 
 // @ts-ignore
 const savedPlayer: string = JSON.parse(localStorage.getItem('player'))
@@ -30,20 +51,28 @@ if (savedPlayer) {
 	Object.assign(player, savedPlayer)
 }
 
+children.forEach((child) => {})
+
 function updateCounters() {
 	money.textContent = player.money.toString()
 
 	childIncome.textContent = `${player.childCount} cash/s`
 	childCounter.textContent = 'Child X ' + player.childCount.toString()
-	childPrice.textContent = `Price: ${100 * player.childCount + 70}`
+	childPrice.textContent = `${childPriceIncrease * player.childCount + childStartPrice}`
 
-	cafChildIncome.textContent = `${player.cafChildCount * 10} cash/s`
+	cafChildIncome.textContent = `${player.cafChildCount * cafChildPower} cash/s`
 	cafChildCounter.textContent = 'Caffeinated Child x ' + player.cafChildCount.toString()
-	cafChildPrice.textContent = `Price: ${2000 * player.cafChildCount + 1000}`
+	cafChildPrice.textContent = `${cafChildPriceIncrease * player.cafChildCount + cafChildStartPrice}`
 
-	momChildIncome.textContent = `${player.momChildCount * 6} cash/s`
+	momChildIncome.textContent = `${player.momChildCount * momChildPower} cash/s`
 	momChildCounter.textContent = 'Mommy`s Boy x ' + player.momChildCount.toString()
-	momChildPrice.textContent = `Price: ${1500 * player.momChildCount + 700}`
+	momChildPrice.textContent = `${momChildPriceIncrease * player.momChildCount + momChildStartPrice}`
+
+	gmoChildIncome.textContent = `${player.gmoChildCount * gmoChildPower} cash/s`
+	gmoChildCounter.textContent = 'GMO Child x ' + player.gmoChildCount.toString()
+	gmoChildPrice.textContent = `${gmoChildPriceIncrease * player.gmoChildCount + gmoChildStartPrice}`
+
+	childTotalIncome.textContent = ` ${player.workPower} cash/s`
 }
 
 updateCounters()
@@ -55,9 +84,13 @@ hammer.addEventListener('click', () => {
 })
 
 const workerIncome = () => {
-	player.money += player.workPower * 1
+	player.money += player.workPower
 	money.textContent = player.money.toString()
 	localStorage.setItem('player', JSON.stringify(player))
+	childPrice.style.color = Number(childPrice.textContent) <= player.money ? 'green' : 'red'
+	cafChildPrice.style.color = Number(cafChildPrice.textContent) <= player.money ? 'green' : 'red'
+	momChildPrice.style.color = Number(momChildPrice.textContent) <= player.money ? 'green' : 'red'
+	gmoChildPrice.style.color = Number(gmoChildPrice.textContent) <= player.money ? 'green' : 'red'
 }
 
 setInterval(workerIncome, 1000)
@@ -88,4 +121,8 @@ cafChild.addEventListener('click', () => {
 
 momChild.addEventListener('click', () => {
 	handleChildClick(1500, 700, 6, 'momChildCount')
+})
+
+gmoChild.addEventListener('click', () => {
+	handleChildClick(1500, 700, 6, 'gmoChildCount')
 })
