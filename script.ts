@@ -1,17 +1,34 @@
 import { children } from './assets/resorce/children.js'
 
-const player = {
+const player: {
+	money: number
+	workPower: number
+	childCount: number
+	cafChildCount: number
+	momChildCount: number
+	gmoChildCount: number
+	hammerURL: string
+	hammerCount: number
+	hammerPrice: number
+	hammerPower: number
+} = {
 	money: 0,
 	workPower: 0,
 	childCount: 0,
 	cafChildCount: 0,
 	momChildCount: 0,
-	gmoChildCount: 0
+	gmoChildCount: 0,
+	hammerURL: 'assets/images/hammer.png',
+	hammerCount: 1,
+	hammerPrice: 10000,
+	hammerPower: 1
 }
 
 const money = document.getElementById('money-counter') as HTMLHeadingElement
 const childTotalIncome = document.getElementById('child-income-total') as HTMLHeadingElement
 const hammer = document.getElementById('hammer') as HTMLImageElement
+
+const newHammer = document.getElementById('new-hammer') as HTMLHeadingElement
 
 const child = document.getElementById('child') as HTMLImageElement
 const childCounter = document.getElementById('child-counter') as HTMLHeadingElement
@@ -51,6 +68,44 @@ if (savedPlayer) {
 	Object.assign(player, savedPlayer)
 }
 
+hammer.src = player.hammerURL
+newHammer.textContent = `Gold Hammer ${player.hammerPrice} $`
+newHammer.addEventListener('click', () => {
+	if (player.hammerPrice <= player.money) {
+		if (player.hammerCount === 1) {
+			player.hammerURL = 'assets/images/hammer2.png'
+			player.money -= player.hammerPrice
+			player.hammerCount++
+			hammer.src = player.hammerURL
+			player.hammerPrice = 90000
+			newHammer.textContent = `Mythic Hammer ${player.hammerPrice} $`
+			player.hammerPower = 100
+			localStorage.setItem('player', JSON.stringify(player))
+			updateCounters()
+		} else if (player.hammerCount === 2) {
+			player.hammerURL = 'assets/images/hammer3.png'
+			player.money -= player.hammerPrice
+			player.hammerCount++
+			hammer.src = player.hammerURL
+			player.hammerPrice = 400000
+			newHammer.textContent = `caffeinated Hammer ${player.hammerPrice} $`
+			player.hammerPower = 450
+			localStorage.setItem('player', JSON.stringify(player))
+			updateCounters()
+		} else if (player.hammerCount === 3) {
+			player.hammerURL = 'assets/images/hammer4.png'
+			player.money -= player.hammerPrice
+			player.hammerCount++
+			hammer.src = player.hammerURL
+			player.hammerPrice = 0
+			newHammer.textContent = `MAX `
+			player.hammerPower = 5000
+			localStorage.setItem('player', JSON.stringify(player))
+			updateCounters()
+		}
+	}
+})
+
 children.forEach((child) => {})
 
 function updateCounters() {
@@ -78,7 +133,7 @@ function updateCounters() {
 updateCounters()
 
 hammer.addEventListener('click', () => {
-	player.money += 1
+	player.money += player.hammerPower
 	localStorage.setItem('player', JSON.stringify(player))
 	updateCounters()
 })
@@ -86,7 +141,7 @@ hammer.addEventListener('click', () => {
 const workerIncome = () => {
 	player.money += player.workPower
 	money.textContent = player.money.toString()
-	localStorage.setItem('player', JSON.stringify(player))
+	/*	localStorage.setItem('player', JSON.stringify(player))*/
 	childPrice.style.color = Number(childPrice.textContent) <= player.money ? 'green' : 'red'
 	cafChildPrice.style.color = Number(cafChildPrice.textContent) <= player.money ? 'green' : 'red'
 	momChildPrice.style.color = Number(momChildPrice.textContent) <= player.money ? 'green' : 'red'
@@ -101,9 +156,11 @@ const handleChildClick = (
 	powerIncrease: number,
 	childType: keyof typeof player
 ) => {
+	// @ts-ignore
 	let price: number = priceIncrease * player[childType] + startPrice
 	if (price <= player.money) {
 		player.money -= price
+		// @ts-ignore
 		player[childType] += 1
 		player.workPower += powerIncrease
 	}

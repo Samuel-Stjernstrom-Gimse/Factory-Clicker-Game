@@ -1,6 +1,7 @@
 #hammer {
     height: 200px;
     transition: 0.1s;
+    cursor: pointer;
 }
 
 #hammer:active {
@@ -12,10 +13,12 @@
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 30%;
+    cursor: pointer;
 }
 
 .workers:active {
     scale: 1.1;
+    cursor: pointer;
 }
 
 body {
@@ -82,4 +85,15 @@ body {
 #plus-one {
     position: absolute;
 
+}
+
+#new-hammer {
+    background-color: #331500;
+    padding: 6px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#new-hammer:hover {
+    background-color: #8b3c05;
 }

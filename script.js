@@ -5,11 +5,16 @@ const player = {
     childCount: 0,
     cafChildCount: 0,
     momChildCount: 0,
-    gmoChildCount: 0
+    gmoChildCount: 0,
+    hammerURL: 'assets/images/hammer.png',
+    hammerCount: 1,
+    hammerPrice: 10000,
+    hammerPower: 1
 };
 const money = document.getElementById('money-counter');
 const childTotalIncome = document.getElementById('child-income-total');
 const hammer = document.getElementById('hammer');
+const newHammer = document.getElementById('new-hammer');
 const child = document.getElementById('child');
 const childCounter = document.getElementById('child-counter');
 const childIncome = document.getElementById('child-income');
@@ -42,6 +47,45 @@ const savedPlayer = JSON.parse(localStorage.getItem('player'));
 if (savedPlayer) {
     Object.assign(player, savedPlayer);
 }
+hammer.src = player.hammerURL;
+newHammer.textContent = `Gold Hammer ${player.hammerPrice} $`;
+newHammer.addEventListener('click', () => {
+    if (player.hammerPrice <= player.money) {
+        if (player.hammerCount === 1) {
+            player.hammerURL = 'assets/images/hammer2.png';
+            player.money -= player.hammerPrice;
+            player.hammerCount++;
+            hammer.src = player.hammerURL;
+            player.hammerPrice = 90000;
+            newHammer.textContent = `Mythic Hammer ${player.hammerPrice} $`;
+            player.hammerPower = 100;
+            localStorage.setItem('player', JSON.stringify(player));
+            updateCounters();
+        }
+        else if (player.hammerCount === 2) {
+            player.hammerURL = 'assets/images/hammer3.png';
+            player.money -= player.hammerPrice;
+            player.hammerCount++;
+            hammer.src = player.hammerURL;
+            player.hammerPrice = 400000;
+            newHammer.textContent = `caffeinated Hammer ${player.hammerPrice} $`;
+            player.hammerPower = 450;
+            localStorage.setItem('player', JSON.stringify(player));
+            updateCounters();
+        }
+        else if (player.hammerCount === 3) {
+            player.hammerURL = 'assets/images/hammer4.png';
+            player.money -= player.hammerPrice;
+            player.hammerCount++;
+            hammer.src = player.hammerURL;
+            player.hammerPrice = 0;
+            newHammer.textContent = `MAX `;
+            player.hammerPower = 5000;
+            localStorage.setItem('player', JSON.stringify(player));
+            updateCounters();
+        }
+    }
+});
 children.forEach((child) => { });
 function updateCounters() {
     money.textContent = player.money.toString();
@@ -61,14 +105,13 @@ function updateCounters() {
 }
 updateCounters();
 hammer.addEventListener('click', () => {
-    player.money += 1;
+    player.money += player.hammerPower;
     localStorage.setItem('player', JSON.stringify(player));
     updateCounters();
 });
 const workerIncome = () => {
     player.money += player.workPower;
     money.textContent = player.money.toString();
-    localStorage.setItem('player', JSON.stringify(player));
     childPrice.style.color = Number(childPrice.textContent) <= player.money ? 'green' : 'red';
     cafChildPrice.style.color = Number(cafChildPrice.textContent) <= player.money ? 'green' : 'red';
     momChildPrice.style.color = Number(momChildPrice.textContent) <= player.money ? 'green' : 'red';
