@@ -1,3 +1,23 @@
+# Legal Child Factory Clicker Game
+
+Legal Child Factory is an incremental clicker game where you manage a factory producing legal children to increase your income. Click your way to success, invest in different types of children, and upgrade your production facilities to maximize your earnings.
+
+## Getting Started
+
+Follow these instructions to get the game up and running on your local machine.
+
+### Prerequisites
+
+Ensure you have the following installed:
+
+- Web browser
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/legal-child-factory.git
 
 
 # TypeScript Project Template Readme
